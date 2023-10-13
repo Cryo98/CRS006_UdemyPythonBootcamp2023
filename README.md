@@ -10,5 +10,5 @@ The programs range from basic to professional, with the aim of improving the ove
 | # | Program | Level | Description | Dependencies |
 |:-:|:--------|:-----:|-------------|--------------|
 | 1 | Band name generator | Beginner | <i>Learn to use basic I/O functions</i> | None |
-| 2 | | | | |
+| 2 | Tip calculator |  Beginner | <i>Primitive data types and arithmatics</i> | None |
 
