@@ -13,5 +13,6 @@ The programs range from beginner to professional level, with the aim of improvin
 | 2 | Tip calculator |  Beginner | <i>Primitive data types and arithmatics</i> | None |
 | 3 | Treasure island | Beginner | <i>Conditional, logic operators and scope</i> | None |
 | 4 | Rock, Paper, Scissors | Beginner | <i>Randomization and lists</i> | random |
-| 5 | Password generator | Beginner | <i>For loops, range</i> | None |
+| 5 | Password generator | Beginner | <i>For loops, range</i> | random |
+| 6 | Reeborg maze solver | Beginner | <i>Functions and while loops</i> | Reeborg |
 
