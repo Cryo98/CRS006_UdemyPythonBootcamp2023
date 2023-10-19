@@ -16,12 +16,19 @@ def main():
         # Checks every letter of the chosen word and compares it with the
         # guess, updating the display
         hasGuessed = False
-        for idx in range(len(chosen_word)):
-            if chosen_word[idx] == letter_guessed:
-                display[idx] = letter_guessed
-                hasGuessed = True
-        if not hasGuessed:
-            lives -= 1
+        if letter_guessed in display:
+            print(f"You've already guessed the letter \"{letter_guessed}\", try another one!")
+            continue
+        else:
+            for idx in range(len(chosen_word)):
+                if chosen_word[idx] == letter_guessed:
+                    display[idx] = letter_guessed
+                    hasGuessed = True
+            if not hasGuessed:
+                print(f"The letter \"{letter_guessed}\" is not in the word.")
+                lives -= 1
+            else:
+                print(f"Good job! The letter \"{letter_guessed}\" is in the word.")
         complete, won = check_win(display, lives)
     print(f"\nThe word was {chosen_word.upper()}\n")
     if won:
