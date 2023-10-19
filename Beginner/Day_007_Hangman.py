@@ -1,5 +1,6 @@
 import random
 from Day_007_Hangman_resources import WORD_LIST, STAGES, LOGO
+import os
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
     while not complete:
         show_word_state(display, lives)
         letter_guessed = ask_input()
+        os.system('cls')
         # Checks every letter of the chosen word and compares it with the
         # guess, updating the display
         hasGuessed = False
