@@ -16,3 +16,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 5 | Password generator | Beginner | <i>For loops, range</i> | random |
 | 6 | Reeborg maze solver | Beginner | <i>Functions and while loops</i> | Reeborg |
 | 7 | Hangman | Beginner | <i>Program flowchart</i> | random, os |
+| 8 | Caesar cipher | Beginner | <i>Functions with inputs</i> | None |
