@@ -16,4 +16,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 5 | Password generator | Beginner | <i>For loops, range</i> | random | *16/10/23* |
 | 6 | Reeborg maze solver | Beginner | <i>Functions and while loops</i> | Reeborg | *18/10/23* |
 | 7 | Hangman | Beginner | <i>Program flowchart</i> | random, os | *19/10/23* |
-| 8 | Caesar cipher | Beginner | <i>Functions with inputs</i> | None | |
+| 8 | Caesar cipher | Beginner | <i>Functions with inputs</i> | None | *20/10/23* |
