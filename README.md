@@ -18,4 +18,4 @@ The programs range from beginner to professional level, with the aim of improvin
 |  7 | Hangman | Beginner | <i>Program flowchart</i> | random, os | *19/10/23* |
 |  8 | Caesar cipher | Beginner | <i>Functions with inputs</i> | None | *20/10/23* |
 |  9 | Secret auction | Beginner | <i>Dictionaries and nesting</i> | os | *21/10/23* |
-| 10 | Calculator | Beginner | <i>Functions with outputs</i> | None |  |
+| 10 | Calculator | Beginner | <i>Functions with outputs</i> | None | *22/10/23* |
