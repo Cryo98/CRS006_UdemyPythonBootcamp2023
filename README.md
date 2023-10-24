@@ -7,9 +7,9 @@ The programs range from beginner to professional level, with the aim of improvin
 
 ---
 ## List of programs
-|  # | Program               | Level    | Objective                                  | Dependencies | Completion date |
+|  # | Program               | Level    | Objective                                     | Dependencies | Completion date |
 |:--:|:----------------------|:--------:|-----------------------------------------------|--------------|:---------------:|
-|  1 | Band name generator   | Beginner | <i>Basic I/O functions</i>       | None         | *12/10/23*      |
+|  1 | Band name generator   | Beginner | <i>Basic I/O functions</i>                    | None         | *12/10/23*      |
 |  2 | Tip calculator        | Beginner | <i>Primitive data types and arithmatics</i>   | None         | *13/10/23*      |
 |  3 | Treasure island       | Beginner | <i>Conditional, logic operators and scope</i> | None         | *14/10/23*      |
 |  4 | Rock, Paper, Scissors | Beginner | <i>Randomization and lists</i>                | random       | *15/10/23*      |
@@ -19,4 +19,4 @@ The programs range from beginner to professional level, with the aim of improvin
 |  8 | Caesar cipher         | Beginner | <i>Functions with inputs</i>                  | None         | *20/10/23*      |
 |  9 | Secret auction        | Beginner | <i>Dictionaries and nesting</i>               | os           | *21/10/23*      |
 | 10 | Calculator            | Beginner | <i>Functions with outputs</i>                 | None         | *22/10/23*      |
-| 11 | Blackjack             | Beginner | <i>Overview of previous topics</i>            | random       | **      |
+| 11 | Blackjack             | Beginner | <i>Overview of previous topics</i>            | random, os   | *24/10/23*      |
