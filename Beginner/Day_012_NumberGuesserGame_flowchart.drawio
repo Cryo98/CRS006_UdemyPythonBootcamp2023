@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="3RfsZADYtGGK9EJEkSxG" name="Page-1">
-        <mxGraphModel dx="1162" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="685" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -64,7 +64,7 @@
                 <mxCell id="21" value="NO" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="18" target="23">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="36" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="18" target="25">
+                <mxCell id="36" value="YES" style="edgeStyle=none;html=1;" edge="1" parent="1" source="18" target="25">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="Is the guess correct" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -110,6 +110,12 @@
                 </mxCell>
                 <mxCell id="37" value="END" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="200" y="760" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=none;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="39" target="9">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="Run until the difficulty is&lt;br&gt;either &quot;hard&quot; or &quot;easy&quot;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="320" width="150" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
