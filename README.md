@@ -20,4 +20,5 @@ The programs range from beginner to professional level, with the aim of improvin
 |  9 | Secret auction        | Beginner | <i>Dictionaries and nesting</i>               | os           | *21/10/23*      |
 | 10 | Calculator            | Beginner | <i>Functions with outputs</i>                 | None         | *22/10/23*      |
 | 11 | Blackjack             | Beginner | <i>Overview of previous topics</i>            | random, os   | *24/10/23*      |
-| 12 | Number guesser game   | Beginner | <i>Scopes</i>                                 | random       | *25/10/23*      | 
+| 12 | Number guesser game   | Beginner | <i>Scopes</i>                                 | random       | *25/10/23*      |
+| 13 | Debugging             | Beginner | <i>Debugging tools</i>                        | None         | ** | 
