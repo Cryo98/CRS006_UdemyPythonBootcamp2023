@@ -3,7 +3,6 @@
 # ===========================================================================
 # Checklist
 # TODO: (EXTRA) make it so that the menu shows only the available beverages
-# TODO: (EXTRA) show price
 
 from Day_015_CoffeeMachine_resources import MENU
 
@@ -40,8 +39,26 @@ def convert_menu_to_str(menu: dict) -> str:
     return entries_text
 
 
+def print_list(menu: dict) -> None:
+    """Print a list of all available products and their price
+
+    Parameters
+    ----------
+    menu : dict
+        Dictionary containing all the available beverages, each containing
+        their cost using the 'cost' keyword.
+    """
+    menu_list = "\n"
+    for entry in menu:
+        entry_cost = menu[entry]["cost"]
+        new_entry_text = f"\t{entry}: ${entry_cost:.2f}\n"
+        menu_list += new_entry_text
+    menu_list = menu_list.removesuffix("\n")
+    print(f"Available beverages:{menu_list}")
+
+
 def print_report(storage: dict) -> None:
-    """Prints a report of the current storage of the machine
+    """Print a report of the current storage of the machine
 
     Parameters
     ----------
@@ -219,18 +236,25 @@ def coffee_machine():
             # Turn off the machine
             return
         elif command == "report":
+            # Print the current storage situation
             print_report(storage)
+        elif command == "list":
+            # Print the list of available beverages
+            print_list(MENU)
         elif command in MENU.keys():
 
+            # Check if ingredients are sufficient
             are_resources_sufficient = check_resources(storage, MENU, command)
             if not are_resources_sufficient:
                 continue
 
+            # Check if the money are sufficient
             total_amount = process_coins()
             is_transaction_valid = check_transaction(command, MENU, total_amount)
             if not is_transaction_valid:
                 continue
-
+            
+            # Make the beverage and deduce the ingredients
             update_storage(command, MENU, storage)
             make_beverage(command)
         else:
