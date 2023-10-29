@@ -12,8 +12,8 @@
 #    - [X] Game loop
 #    - [X] Get user's answer for comparison
 #    - [X] Loop for winning
-#    - [ ] Print result messages
-#    - [ ] Handle emptied list
+#    - [X] Print result messages
+#    - [X] Handle emptied list
 
 
 from Day_014_HigherLower_resources import LOGO, VS, DATA
