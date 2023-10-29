@@ -31,16 +31,15 @@ def higher_lower():
     while is_game_running:
         score = 0
         data = DATA.copy()
-        previous_winner = None
+        previous_entry = None
+        print(LOGO)
+        print("================================")
         while is_answer_correct:
-            # ASCII art 
-            print(LOGO)
-            print("================================")
             # Uses the previous winner if exists
-            if previous_winner is None:
+            if previous_entry is None:
                 entry_1 = select_random_entry(data)
             else:
-                entry_1 = previous_winner
+                entry_1 = previous_entry
             # NOTE: each time a new entry is picked, that same entry
             # is removed from the list of available entries
             entry_2 = select_random_entry(data)
@@ -50,6 +49,9 @@ def higher_lower():
                 print(f"Psst, A has {entry_1['follower_count']}M and B has {entry_2['follower_count']}M followers.")
             response = get_user_answer_to_comparison()
             is_answer_correct, previous_winner = validate_response(response, entry_1, entry_2)
+            clear_screen()
+            print(LOGO)
+            print("================================")
             if is_answer_correct:
                 score += 1
                 print_correct_answer_message(previous_winner)
@@ -58,8 +60,8 @@ def higher_lower():
             if len(data) == 0:
                 print_winning_message(previous_winner, score)
                 is_answer_correct = False
+            previous_entry = entry_2
         is_game_running = get_user_answer_to_retry()
-        clear_screen()
         if is_game_running:
             # Resets the game loop
             is_answer_correct = True
@@ -141,14 +143,11 @@ def validate_response(
     It assumes both the entries have a 'follower_count' parameter."""
     if entry_1['follower_count'] > entry_2['follower_count']:
         correct_answer = "A"
-        highest_entry = entry_1
+        winning_entry = entry_1
     else:
         correct_answer = "B"
-        highest_entry = entry_2
-    if response == correct_answer:
-        return True, highest_entry
-    else:
-        return False, highest_entry
+        winning_entry = entry_2
+    return response == correct_answer, winning_entry
 
 
 def print_losing_message(
