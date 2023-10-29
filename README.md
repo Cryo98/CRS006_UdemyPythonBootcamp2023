@@ -23,3 +23,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 12 | Number guesser game   | Beginner | <i>Scopes</i>                                 | random       | *25/10/23*      |
 | 13 | Debugging             | Beginner | <i>Debugging tools</i>                        | None         | *26/10/23*      |
 | 14 | Higher-Lower          | Beginner | <i>Coding organization</i>                    | random, os   | *28/10/23*      |
+| 15 | Coffee Machine        | Beginner | <i>Python environment</i>                     |  | ** |
