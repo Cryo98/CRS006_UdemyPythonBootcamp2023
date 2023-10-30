@@ -24,3 +24,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 13 | Debugging             | Beginner     | <i>Debugging tools</i>                        | None         | *26/10/23*      |
 | 14 | Higher-Lower          | Beginner     | <i>Coding organization</i>                    | random, os   | *28/10/23*      |
 | 15 | Coffee Machine        | Intermediate | <i>Python environment and IDE</i>             | None         | *29/10/23*      |
+| 16 | OOP Coffee Machine    | Intermediate | <i>OOP</i>                                    | None         | ** |
