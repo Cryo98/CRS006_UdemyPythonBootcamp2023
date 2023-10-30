@@ -1,4 +1,4 @@
-from Day_011_Blackjack_resources import LOGO, DECK
+from resources import LOGO, DECK
 import random
 import os
 

@@ -1,4 +1,4 @@
-from Day_008_CaesarCipher_resources import LOGO, ALPHABET
+from resources import LOGO, ALPHABET
 
 
 def caesar_cipher(phrase, shift, direction):

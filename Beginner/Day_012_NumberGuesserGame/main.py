@@ -1,5 +1,5 @@
 import random
-from Day_012_NumberGuesserGame_resources import LOGO
+from resources import LOGO
 
 # Global constants used for easy parameters change
 EASY_LEVEL_ATTEMPTS = 10

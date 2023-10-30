@@ -1,4 +1,4 @@
-from Day_010_Calculator_resources import LOGO
+from resources import LOGO
 
 
 def add(n1, n2):

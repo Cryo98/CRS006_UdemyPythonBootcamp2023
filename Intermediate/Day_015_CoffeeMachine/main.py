@@ -4,7 +4,7 @@
 # Checklist
 # TODO: (EXTRA) make it so that the menu shows only the available beverages
 
-from Day_015_CoffeeMachine_resources import MENU
+from resources import MENU
 
 # CONSTANTS
 INITIAL_WATER = 300  # ml

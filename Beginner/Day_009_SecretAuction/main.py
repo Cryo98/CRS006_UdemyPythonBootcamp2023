@@ -1,4 +1,4 @@
-from Day_009_SecretAuction_resources import LOGO
+from resources import LOGO
 import os
 
 

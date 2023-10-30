@@ -1,5 +1,5 @@
 import random
-from Day_007_Hangman_resources import WORD_LIST, STAGES, LOGO
+from resources import WORD_LIST, STAGES, LOGO
 import os
 
 

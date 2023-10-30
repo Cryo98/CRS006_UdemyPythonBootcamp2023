@@ -16,7 +16,7 @@
 #    - [X] Handle emptied list
 
 
-from Day_014_HigherLower_resources import LOGO, VS, DATA
+from resources import LOGO, VS, DATA
 from random import randint
 import os
 
