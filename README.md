@@ -25,4 +25,5 @@ The programs range from beginner to professional level, with the aim of improvin
 | 14 | Higher-Lower          | Beginner     | <i>Coding organization</i>                    | random, os   | *28/10/23*      |
 | 15 | Coffee Machine        | Intermediate | <i>Python environment and IDE</i>             | None         | *29/10/23*      |
 | 16 | OOP Coffee Machine    | Intermediate | <i>OOP</i>                                    | None         | *30/10/23*      |
-| 17 | Quiz game             | Intermediate | <i>Classes</i>                                | | |
+| 17 | Quiz game             | Intermediate | <i>Classes</i>                                | None         | *31/10/23*      |
+| 18 | Art creator           | Intermediate | <i>Turtle graphics and tuples</i>             | | |
