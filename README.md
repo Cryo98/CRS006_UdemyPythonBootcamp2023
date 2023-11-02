@@ -27,3 +27,5 @@ The programs range from beginner to professional level, with the aim of improvin
 | 16 | OOP Coffee Machine    | Intermediate | <i>OOP</i>                                    | None                      | *30/10/23*      |
 | 17 | Quiz game             | Intermediate | <i>Classes</i>                                | None                      | *31/10/23*      |
 | 18 | Art creator           | Intermediate | <i>Turtle graphics and tuples</i>             | turtle, colorgram, random | *01/11/23*      |
+| 19a | Etch-a-sketch | Intermediate | <i>Event listener</i> | turtle | *02/11/2023* |
+| 19b | Turtle race | Intermediate | <i>Multiple instances and state</i> | turtle, random | ** | 
