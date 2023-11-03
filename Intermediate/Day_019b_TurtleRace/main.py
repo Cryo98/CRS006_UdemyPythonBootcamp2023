@@ -63,7 +63,7 @@ while is_race_on:
 if winner == user_bet:
     print("You've won!", end=" ")
 else:
-    print("You've lost...", end="")
+    print("You've lost...", end=" ")
 
 print(f"The winner is the {winner} turtle!")
 
