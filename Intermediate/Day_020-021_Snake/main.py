@@ -22,7 +22,7 @@ screen.tracer(0)
 snake = Snake()
 segment_size = snake.get_segment_size()
 food = Food(window_height=SCREEN_HEIGHT, window_width=SCREEN_WIDTH, grid_step=segment_size)
-scoreboard = Scoreboard(window_height=SCREEN_HEIGHT, font_size=24)
+scoreboard = Scoreboard(window_height=SCREEN_HEIGHT, font_size=24, font_name="Courier")
 
 # Initializes the user commands
 screen.listen()
