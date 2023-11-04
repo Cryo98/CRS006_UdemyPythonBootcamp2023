@@ -40,27 +40,38 @@ class Snake():
             if current_section_heading != prev_section_heading:
                 section.setheading(prev_section_heading)
             prev_section_heading = current_section_heading
+        # Flag that controls if a change in direction is already on-going,
+        # to avoid overlapping commands
         self.is_turning = False
 
     def move_up(self):
+        """Changes the heading of the snake to up direction, unless it has
+        already received a command or it is going down"""
         if not self.is_turning and self.head.heading() != DOWN:
             self.head.setheading(UP)
-        self.is_turning = True
+            self.is_turning = True
 
     def move_down(self):
+        """Changes the heading of the snake to down direction, unless it has
+        already received a command or it is going up"""
         if not self.is_turning and self.head.heading() != UP:
             self.head.setheading(DOWN)
-        self.is_turning = True
+            self.is_turning = True
 
     def move_left(self):
+        """Changes the heading of the snake to left direction, unless it has
+        already received a command or it is going right"""
         if not self.is_turning and self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
-        self.is_turning = True
+            self.is_turning = True
 
     def move_right(self):
+        """Changes the heading of the snake to right direction, unless it has
+        already received a command or it is going left"""
         if not self.is_turning and self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
-        self.is_turning = True
+            self.is_turning = True
 
     def get_segment_size(self):
+        """Returns the size of a single segment"""
         return SEGMENT_SIZE
