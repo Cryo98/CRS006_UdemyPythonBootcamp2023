@@ -1,18 +1,23 @@
 from turtle import Turtle
 
+DEFAULT_FONT_NAME = "Arial"
+DEFAULT_FONT_SIZE = 12
+DEFAULT_FONT_TYPE = "normal"
+DEFAULT_ALIGNMENT = "center"
+
 
 class Scoreboard(Turtle):
 
     def __init__(self,
                  window_height: int,
-                 font_size: int = 12,
-                 font_name: str = "Arial",
-                 font_type: str = "normal",
-                 text_align: str = "center",
+                 font_size: int = DEFAULT_FONT_SIZE,
+                 font_name: str = DEFAULT_FONT_NAME,
+                 font_type: str = DEFAULT_FONT_TYPE,
+                 text_align: str = DEFAULT_ALIGNMENT,
                  ) -> None:
         super().__init__(visible=False)
         self.font = (font_name, font_size, font_type)
-        self.gameover_font = (font_name, font_size*2, "normal")
+        self.gameover_font = (font_name, font_size*2, font_type)
         self.text_align = text_align
         self.penup()
         self.color("white")
@@ -22,11 +27,15 @@ class Scoreboard(Turtle):
 
     def update_score(self):
         self.clear()
-        self.write(f"Score: {self.score}", align=self.text_align, font=self.font)
+        self.write(f"Score: {self.score}",
+                   align=self.text_align,
+                   font=self.font)
 
     def print_game_over(self):
         self.goto(0, 0)
-        self.write("GAME OVER", align=self.text_align, font=self.gameover_font)
+        self.write("GAME OVER",
+                   align=self.text_align,
+                   font=self.gameover_font)
 
     def increase_score(self):
         self.score += 1
