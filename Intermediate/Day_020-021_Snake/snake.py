@@ -14,19 +14,26 @@ class Snake():
 
     def __init__(self) -> None:
         self.segments = list()
-        self.__init_segments()
+        self._init_segments()
         self.head = self.segments[0]
         # Flag to avoid quick keystrokes that allow to invert direction
         self.is_turning = False
 
-    def __init_segments(self) -> None:
+    def _init_segments(self) -> None:
+        """Initializes an amount of segments"""
         for i in range(INITIAL_SEGMENTS):
-            section = Turtle(shape="square")
-            section.color("white")
-            section.penup()
-            section.speed("fastest")
+            section = self.create_segment()
             section.goto(-SEGMENT_SIZE*i, 0)
             self.segments.append(section)
+
+    def create_segment(self):
+        """Returns a Turtle object with the characteristics of a snake segment.
+        """
+        section = Turtle(shape="square")
+        section.color("white")
+        section.penup()
+        section.speed("fastest")
+        return section
 
     def move(self) -> None:
         """Moves all the segments in a convoy-like manner
@@ -75,3 +82,11 @@ class Snake():
     def get_segment_size(self):
         """Returns the size of a single segment"""
         return SEGMENT_SIZE
+
+    def add_segment(self):
+        """Adds a segment to the end of the snake"""
+        segment = self.create_segment()
+        segment.setposition(self.segments[-1].pos())
+        segment.setheading(self.segments[-1].heading())
+        segment.backward(SEGMENT_SIZE)
+        self.segments.append(segment)
