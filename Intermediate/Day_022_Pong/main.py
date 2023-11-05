@@ -4,10 +4,10 @@
 # [X] Create paddles for players -> Paddle class
 # [X] Add control to paddles
 # [X] Add ball collision with wall
-# [ ] Add ball collision with paddle
+# [X] Add ball collision with paddle
 # [X] Create visual environment
 # [ ] Add scoring system -> Scoreboard class
-# [ ] Add detection of miss
+# [X] Add detection of miss
 
 from turtle import Screen, Turtle, _Screen
 from paddle import Paddle
@@ -25,7 +25,7 @@ def pong():
     screen = initialize_screen()
     player_1 = Paddle(initial_pos=((SCREEN_WIDTH/2 - 40), 0), speed=800)
     player_2 = Paddle(initial_pos=(-(SCREEN_WIDTH/2 - 40), 0), speed=800)
-    ball = Ball(size=20, speed=600)
+    ball = Ball(size=20, speed=300, shape="square")
     initialize_controls(screen, player_1, player_2)
     is_game_on = True
     while is_game_on:
@@ -33,6 +33,9 @@ def pong():
         detect_ball_wall_collision(height=SCREEN_HEIGHT, width=SCREEN_WIDTH, ball=ball)
         detect_ball_paddle_collision(paddle=player_1, ball=ball)
         detect_ball_paddle_collision(paddle=player_2, ball=ball)
+        has_scored, score, new_direction = detect_ball_out_of_bounds(ball, player_2, player_1)
+        if has_scored:
+            ball.refresh(new_direction)
         screen.update()
         time.sleep(TIME_STEP)
     screen.exitonclick()
@@ -80,6 +83,23 @@ def detect_ball_paddle_collision(paddle: Paddle, ball: Ball):
         # Ensures that the bounce happens only if the ball is going against the paddle
         if x_distance * ball.xvel < 0:
             ball.x_bounce()
+
+
+def detect_ball_out_of_bounds(ball: Ball, left_player: Paddle, right_player: Paddle):
+    """Detects if the ball surpasses one of the players and is not reachable"""
+    if ball.xcor() < left_player.xcor() - ball.size:
+        has_scored = True
+        score = (0, 1)
+        new_direction = "right"
+    elif ball.xcor() > right_player.xcor() + ball.size:
+        has_scored = True
+        score = (1, 0)
+        new_direction = "left"
+    else:
+        has_scored = False
+        score = None
+        new_direction = None
+    return has_scored, score, new_direction
 
 
 def create_perimeter(
