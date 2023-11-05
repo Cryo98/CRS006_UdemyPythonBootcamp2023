@@ -21,8 +21,11 @@ class Ball(Turtle):
         self.yvel = 0
         self.refresh()
 
-    def refresh(self):
-        self.xvel = self.movement * random.choice([1, -1])
+    def refresh(self, direction: str = "right"):
+        if direction == "right":
+            self.xvel = self.movement
+        elif direction == "left":
+            self.xvel = -self.movement
         self.yvel = self.movement * random.choice([1, -1])
         self.goto(0, 0)
 
