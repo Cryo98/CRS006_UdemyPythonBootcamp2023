@@ -13,8 +13,6 @@ class Paddle(Turtle):
         # Visuals & configuration
         self.setheading(90)
         self.shapesize(stretch_len=5)
-        # TODO add top-bottom coordinates
-        print(self.shapesize())
         self.color(color)
         self.speed("fastest")
         self.penup()
@@ -23,9 +21,15 @@ class Paddle(Turtle):
         self.movement = speed
 
     def move_up(self, dt: float = 1):
-        # TODO add a way to block movement within a region
         self.fd(self.movement * dt)
 
     def move_down(self, dt: float = 1):
-        # TODO add a way to block movement within a region
         self.bk(self.movement * dt)
+
+    def y_top(self):
+        # Return y coordinate of top of the paddle
+        return self.ycor() + 20*self.shapesize()[1]/2
+    
+    def y_btm(self):
+        # Return y coordinate of bottom of the paddle
+        return self.ycor() - 20*self.shapesize()[1]/2
