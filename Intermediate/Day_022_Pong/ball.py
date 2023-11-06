@@ -34,24 +34,12 @@ class Ball(Turtle):
         dy = self.yvel * dt
         x_new = self.xcor() + dx
         y_new = self.ycor() + dy
-        # TODO convert from hardcoded to adaptive
-        # if y_new > (300 - self.size/2):
-        #     y_new = 600 - self.size - y_new
-        #     self.yvel *= -1
-        # elif y_new < (-300 + self.size/2):
-        #     y_new = -600 + self.size - y_new
-        #     self.yvel *= -1
-        # if x_new > (400 - self.size/2):
-        #     x_new = 800 - self.size - x_new
-        #     self.xvel *= -1
-        # elif x_new < (-400 + self.size/2):
-        #     x_new = -800 + self.size - x_new
-        #     self.xvel *= -1
-        # print("X:", x_new, ", Y:", y_new)
         self.goto(x_new, y_new)
 
-    def y_bounce(self):
-        self.yvel *= -1
+    def y_bounce(self, speed_multiplier: int = 1):
+        self.yvel *= -speed_multiplier
+        self.xvel *= speed_multiplier
 
-    def x_bounce(self):
-        self.xvel *= -1
+    def x_bounce(self, speed_multiplier: int = 1):
+        self.yvel *= speed_multiplier
+        self.xvel *= -speed_multiplier
