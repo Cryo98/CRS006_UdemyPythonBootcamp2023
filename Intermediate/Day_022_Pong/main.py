@@ -16,10 +16,16 @@ from scoreboard import Scoreboard
 import time
 
 # CONSTANTS
+
+# Screen width in pixels
 SCREEN_WIDTH = 800
+# Screen height in pixels
 SCREEN_HEIGHT = 600
+# Sleep time between one cycle and the next in seconds
 TIME_STEP = 1/60
+# Font size of the scoreboard
 SCORE_FONT_SIZE = 36
+# By how much the speed of the ball is multiplied at each paddle bounce
 PADDLE_BOUNCE_MULTIPLIER = 1.05
 
 
@@ -58,7 +64,8 @@ def pong():
 
 def initialize_screen() -> _Screen:
     """Initialize the screen to give an appearance similar to pong, returning
-    the Screen object."""
+    the Screen object.
+    """
     screen = Screen()
     # screen.screensize(canvwidth=SCREEN_WIDTH, canvheight=SCREEN_HEIGHT)
     screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
@@ -71,27 +78,21 @@ def initialize_screen() -> _Screen:
     return screen
 
 
-def initialize_controls(screen: _Screen, player_1: Paddle, player_2: Paddle):
-    """Initialize the event listener and associate controls to the different
-    functions"""
-    screen.listen()
-    screen.onkeypress(key="Up", fun=lambda: move_paddle_up(player_1, SCREEN_HEIGHT/2, TIME_STEP))
-    screen.onkeypress(key="Down", fun=lambda: move_paddle_down(player_1, -SCREEN_HEIGHT/2, TIME_STEP))
-    screen.onkeypress(key="w", fun=lambda: move_paddle_up(player_2, SCREEN_HEIGHT/2, TIME_STEP))
-    screen.onkeypress(key="s", fun=lambda: move_paddle_down(player_2, -SCREEN_HEIGHT/2, TIME_STEP))
-    screen.onkeypress(key="Escape", fun=screen.bye)
-
-
-def detect_ball_wall_collision(height: int, width: int, ball: Ball):
+# COLLISIONS
+def detect_ball_wall_collision(
+        height: int,
+        ball: Ball) -> None:
     """Detects when the ball reaches one of the horizontal walls and makes it
-    bounce"""
+    bounce
+    """
     if ball.ycor() >= (height/2 - ball.size/2) or ball.ycor() <= -(height/2 - ball.size/2):
         ball.y_bounce()
-    # if ball.xcor() >= (width/2 - ball.size/2) or ball.xcor() <= -(width/2 - ball.size/2):
-    #     ball.x_bounce()
 
 
-def detect_ball_paddle_collision(paddle: Paddle, ball: Ball):
+def detect_ball_paddle_collision(
+        paddle: Paddle,
+        ball: Ball,
+        ) -> None:
     """Detects when the ball touches a paddle and makes it bounce"""
     # Distance at which the two objects collide
     x_contact_distance = ball.size/2 + paddle.shapesize()[0] * 20 / 2
@@ -105,10 +106,29 @@ def detect_ball_paddle_collision(paddle: Paddle, ball: Ball):
             ball.x_bounce(speed_multiplier=PADDLE_BOUNCE_MULTIPLIER)
 
 
-def detect_ball_out_of_bounds(ball: Ball, left_player: Paddle, right_player: Paddle):
+def detect_ball_out_of_bounds(
+        ball: Ball,
+        left_player: Paddle,
+        right_player: Paddle,
+        ) -> tuple[bool, tuple, str]:
     """Detects if the ball surpasses one of the players and is not reachable,
-    returning the if it has scored, the score update and the next direction of
-    throw when the ball resets."""
+    returning a flag if it has scored, the score update as a tuple and the
+    next direction of throw when the ball resets as a string.
+
+    Returns
+    -------
+    has_scored : bool
+        Flag returning if one of the players has scored, True if someone has,
+        False if no one has.
+    score : tuple[int, int]
+        Tuple containing the score increase, it defaults to (0, 0), if the left
+        player has scored it will be (1, 0), else if the right player has
+        scored it will be (0, 1).
+    new_direction : str
+        String representing the direction of the next toss, towards to the
+        player who has scored, returns 'right' if the right player has scored,
+        returns instead 'left' if the left player has scored.
+    """
     if ball.xcor() < left_player.xcor() - ball.size:
         has_scored = True
         score = (0, 1)
@@ -122,6 +142,18 @@ def detect_ball_out_of_bounds(ball: Ball, left_player: Paddle, right_player: Pad
         score = None
         new_direction = None
     return has_scored, score, new_direction
+
+
+# CONTROLS
+def initialize_controls(screen: _Screen, player_1: Paddle, player_2: Paddle):
+    """Initialize the event listener and associate controls to the different
+    functions"""
+    screen.listen()
+    screen.onkeypress(key="Up", fun=lambda: move_paddle_up(player_1, SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="Down", fun=lambda: move_paddle_down(player_1, -SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="w", fun=lambda: move_paddle_up(player_2, SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="s", fun=lambda: move_paddle_down(player_2, -SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="Escape", fun=screen.bye)
 
 
 def move_paddle_up(paddle: Paddle, limit: int = 100, dt: float = 1.0):
@@ -154,6 +186,7 @@ def move_paddle_down(paddle: Paddle, limit: int = -100, dt: float = 1.0):
         paddle.move_down(dt)
 
 
+# GRAPHIC UTILITIES
 def create_perimeter(
         width: int,
         height: int,
