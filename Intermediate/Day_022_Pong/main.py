@@ -6,7 +6,7 @@
 # [X] Add ball collision with wall
 # [X] Add ball collision with paddle
 # [X] Create visual environment
-# [ ] Add scoring system -> Scoreboard class
+# [X] Add scoring system -> Scoreboard class
 # [X] Add detection of miss
 
 from turtle import Screen, Turtle, _Screen
@@ -20,28 +20,39 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TIME_STEP = 1/60
 SCORE_FONT_SIZE = 36
+PADDLE_BOUNCE_MULTIPLIER = 1.05
 
 
 def pong():
     """Runs the main script for the game"""
     screen = initialize_screen()
+    # Objects initialization
     player_1 = Paddle(initial_pos=((SCREEN_WIDTH/2 - 40), 0), speed=800)
     player_2 = Paddle(initial_pos=(-(SCREEN_WIDTH/2 - 40), 0), speed=800)
     ball = Ball(size=20, speed=300, shape="square")
     scoreboard = Scoreboard(pos=(0, SCREEN_HEIGHT/2 - 3*SCORE_FONT_SIZE/2), font_size=SCORE_FONT_SIZE)
     initialize_controls(screen, player_1, player_2)
+
+    # Main gameloop
     is_game_on = True
     while is_game_on:
+        # Update objects position
         ball.move(dt=TIME_STEP)
+
+        # Collision detection
         detect_ball_wall_collision(height=SCREEN_HEIGHT, width=SCREEN_WIDTH, ball=ball)
         detect_ball_paddle_collision(paddle=player_1, ball=ball)
         detect_ball_paddle_collision(paddle=player_2, ball=ball)
         has_scored, score, new_direction = detect_ball_out_of_bounds(ball, player_2, player_1)
+
+        # Score update
         if has_scored:
             ball.refresh(new_direction)
             scoreboard.increment_score(score)
         screen.update()
+
         time.sleep(TIME_STEP)
+
     screen.exitonclick()
 
 
@@ -61,23 +72,27 @@ def initialize_screen() -> _Screen:
 
 
 def initialize_controls(screen: _Screen, player_1: Paddle, player_2: Paddle):
+    """Initialize the event listener and associate controls to the different
+    functions"""
     screen.listen()
-    screen.onkeypress(key="Up", fun=lambda: player_1.move_up(TIME_STEP))
-    screen.onkeypress(key="Down", fun=lambda: player_1.move_down(TIME_STEP))
-    screen.onkeypress(key="w", fun=lambda: player_2.move_up(TIME_STEP))
-    screen.onkeypress(key="s", fun=lambda: player_2.move_down(TIME_STEP))
+    screen.onkeypress(key="Up", fun=lambda: move_paddle_up(player_1, SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="Down", fun=lambda: move_paddle_down(player_1, -SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="w", fun=lambda: move_paddle_up(player_2, SCREEN_HEIGHT/2, TIME_STEP))
+    screen.onkeypress(key="s", fun=lambda: move_paddle_down(player_2, -SCREEN_HEIGHT/2, TIME_STEP))
     screen.onkeypress(key="Escape", fun=screen.bye)
 
 
 def detect_ball_wall_collision(height: int, width: int, ball: Ball):
-    """Detects when the ball overcomes one of the walls"""
+    """Detects when the ball reaches one of the horizontal walls and makes it
+    bounce"""
     if ball.ycor() >= (height/2 - ball.size/2) or ball.ycor() <= -(height/2 - ball.size/2):
         ball.y_bounce()
-    if ball.xcor() >= (width/2 - ball.size/2) or ball.xcor() <= -(width/2 - ball.size/2):
-        ball.x_bounce()
+    # if ball.xcor() >= (width/2 - ball.size/2) or ball.xcor() <= -(width/2 - ball.size/2):
+    #     ball.x_bounce()
 
 
 def detect_ball_paddle_collision(paddle: Paddle, ball: Ball):
+    """Detects when the ball touches a paddle and makes it bounce"""
     # Distance at which the two objects collide
     x_contact_distance = ball.size/2 + paddle.shapesize()[0] * 20 / 2
     y_contact_distance = ball.size/2 + paddle.shapesize()[1] * 20 / 2
@@ -87,11 +102,13 @@ def detect_ball_paddle_collision(paddle: Paddle, ball: Ball):
     if abs(x_distance) <= x_contact_distance and abs(y_distance) <= y_contact_distance:
         # Ensures that the bounce happens only if the ball is going against the paddle
         if x_distance * ball.xvel < 0:
-            ball.x_bounce()
+            ball.x_bounce(speed_multiplier=PADDLE_BOUNCE_MULTIPLIER)
 
 
 def detect_ball_out_of_bounds(ball: Ball, left_player: Paddle, right_player: Paddle):
-    """Detects if the ball surpasses one of the players and is not reachable"""
+    """Detects if the ball surpasses one of the players and is not reachable,
+    returning the if it has scored, the score update and the next direction of
+    throw when the ball resets."""
     if ball.xcor() < left_player.xcor() - ball.size:
         has_scored = True
         score = (0, 1)
@@ -107,13 +124,55 @@ def detect_ball_out_of_bounds(ball: Ball, left_player: Paddle, right_player: Pad
     return has_scored, score, new_direction
 
 
+def move_paddle_up(paddle: Paddle, limit: int = 100, dt: float = 1.0):
+    """Moves the paddle up if does not surpass the specified region.
+
+    Parameters
+    ----------
+    paddle : paddle.Paddle
+        Paddle object to move
+    limit : int (optional)
+        Upper limit to movement (default is 100).
+    dt : float (optional)
+        Time step to consider for movement (default is 1.0)."""
+    if paddle.y_top() < limit:
+        paddle.move_up(dt)
+
+
+def move_paddle_down(paddle: Paddle, limit: int = -100, dt: float = 1.0):
+    """Moves the paddle down if does not surpass the specified region.
+
+    Parameters
+    ----------
+    paddle : paddle.Paddle
+        Paddle object to move
+    limit : int (optional)
+        Lower limit to movement (default is -100).
+    dt : float (optional)
+        Time step to consider for movement (default is 1.0)."""
+    if paddle.y_btm() > limit:
+        paddle.move_down(dt)
+
+
 def create_perimeter(
         width: int,
         height: int,
         line_color: str = "black",
         line_width: int = 2,
         ) -> None:
-    # TODO add docstring
+    """Creates a rectangular perimeter centered around (0, 0).
+
+    Parameters
+    ----------
+    width : int
+        Width of the perimeter.
+    height : int
+        Height of the perimeter.
+    line_color : str (optional)
+        Color of the line (default is 'black').
+    line_width : int (optional)
+        Width of the line drawn (default is 2).
+    """
     perimeter_tracer = Turtle(visible=False)
     perimeter_tracer.penup()
     perimeter_tracer.goto(-width/2, -height/2)
