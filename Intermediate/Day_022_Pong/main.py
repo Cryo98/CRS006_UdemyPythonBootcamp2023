@@ -12,12 +12,14 @@
 from turtle import Screen, Turtle, _Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 # CONSTANTS
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TIME_STEP = 1/60
+SCORE_FONT_SIZE = 36
 
 
 def pong():
@@ -26,6 +28,7 @@ def pong():
     player_1 = Paddle(initial_pos=((SCREEN_WIDTH/2 - 40), 0), speed=800)
     player_2 = Paddle(initial_pos=(-(SCREEN_WIDTH/2 - 40), 0), speed=800)
     ball = Ball(size=20, speed=300, shape="square")
+    scoreboard = Scoreboard(pos=(0, SCREEN_HEIGHT/2 - 3*SCORE_FONT_SIZE/2), font_size=SCORE_FONT_SIZE)
     initialize_controls(screen, player_1, player_2)
     is_game_on = True
     while is_game_on:
@@ -36,6 +39,7 @@ def pong():
         has_scored, score, new_direction = detect_ball_out_of_bounds(ball, player_2, player_1)
         if has_scored:
             ball.refresh(new_direction)
+            scoreboard.increment_score(score)
         screen.update()
         time.sleep(TIME_STEP)
     screen.exitonclick()
@@ -62,6 +66,7 @@ def initialize_controls(screen: _Screen, player_1: Paddle, player_2: Paddle):
     screen.onkeypress(key="Down", fun=lambda: player_1.move_down(TIME_STEP))
     screen.onkeypress(key="w", fun=lambda: player_2.move_up(TIME_STEP))
     screen.onkeypress(key="s", fun=lambda: player_2.move_down(TIME_STEP))
+    screen.onkeypress(key="Escape", fun=screen.bye)
 
 
 def detect_ball_wall_collision(height: int, width: int, ball: Ball):
