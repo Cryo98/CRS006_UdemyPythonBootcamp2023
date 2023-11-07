@@ -14,7 +14,7 @@ PLAYER_MOVEMENT = 20
 # Region on top and bottom of screen where no cars appear
 EMPTY_REGION = 80
 # Difficulty level multiplier
-CARS_SPEED_MULTIPLIER = 1.05
+CARS_SPEED_MULTIPLIER = 1.2
 
 
 def main():
