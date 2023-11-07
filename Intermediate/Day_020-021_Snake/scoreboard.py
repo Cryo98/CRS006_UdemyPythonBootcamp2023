@@ -4,6 +4,7 @@ DEFAULT_FONT_NAME = "Arial"
 DEFAULT_FONT_SIZE = 12
 DEFAULT_FONT_TYPE = "normal"
 DEFAULT_ALIGNMENT = "center"
+HIGHSCORE_FILE = "highscore.txt"
 
 
 class Scoreboard(Turtle):
@@ -23,13 +24,20 @@ class Scoreboard(Turtle):
         self.color("white")
         self.goto(x=0, y=(window_height/2 - 2*font_size))
         self.score = 0
+        self.highscore = 0
         self.update_score()
 
     def update_score(self):
         self.clear()
-        self.write(f"Score: {self.score}",
+        self.write(f"Score: {self.score}, Highscore: {self.highscore}",
                    align=self.text_align,
                    font=self.font)
+
+    def reset(self):
+        if self.score > self.highscore:
+            self.highscore = self.score
+        self.score = 0
+        self.update_score()
 
     def print_game_over(self):
         self.goto(0, 0)

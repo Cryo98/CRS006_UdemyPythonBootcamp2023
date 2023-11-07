@@ -27,13 +27,22 @@ class Snake():
             self.segments.append(section)
 
     def create_segment(self):
-        """Returns a Turtle object with the characteristics of a snake segment.
-        """
+        """Returns a Turtle object with the characteristics of a snake segment."""
         section = Turtle(shape="square")
         section.color("white")
         section.penup()
         section.speed("fastest")
         return section
+
+    def reset(self):
+        """Resets the snake."""
+        for segment in self.segments:
+            segment.clear()
+            segment.hideturtle()
+        self.segments.clear()
+        self._init_segments()
+        self.head = self.segments[0]
+        self.is_turning = False
 
     def move(self) -> None:
         """Moves all the segments in a convoy-like manner

@@ -50,14 +50,14 @@ while is_game_on:
     too_far_up = snake.head.ycor() > (SCREEN_HEIGHT/2 - segment_size/2)
     too_far_down = snake.head.ycor() < -(SCREEN_HEIGHT/2 - segment_size/2)
     if too_far_right or too_far_left or too_far_up or too_far_down:
-        is_game_on = False
-        scoreboard.print_game_over()
+        scoreboard.reset()
+        snake.reset()
 
     # Detect collision with tail
     for segment in snake.segments[1:]:
-        if snake.head.distance(segment.pos()) < segment_size/2:
-            is_game_on = False
-            scoreboard.print_game_over()
+        if snake.head.distance(segment.pos()) <= segment_size/2:
+            scoreboard.reset()
+            snake.reset()
 
     screen.update()
     time.sleep(TIMESTEP)
