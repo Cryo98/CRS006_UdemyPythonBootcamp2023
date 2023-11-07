@@ -24,7 +24,14 @@ class Scoreboard(Turtle):
         self.color("white")
         self.goto(x=0, y=(window_height/2 - 2*font_size))
         self.score = 0
-        self.highscore = 0
+        with open(HIGHSCORE_FILE, 'a+') as f:
+            f.seek(0)
+            highscore_str = f.read()
+            print(highscore_str)
+            if len(highscore_str) > 0:
+                self.highscore = int(highscore_str)
+            else:
+                self.highscore = 0
         self.update_score()
 
     def update_score(self):
@@ -36,6 +43,8 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.highscore:
             self.highscore = self.score
+            with open(HIGHSCORE_FILE, 'w+') as f:
+                f.write(str(self.highscore))
         self.score = 0
         self.update_score()
 
