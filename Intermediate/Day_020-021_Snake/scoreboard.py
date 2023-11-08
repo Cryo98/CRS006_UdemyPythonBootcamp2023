@@ -48,7 +48,7 @@ class Scoreboard(Turtle):
 
         # Highscore and score initialization
         self.score = 0
-        cwd = os.path.dirname(os.path.abspath(__file__))
+        cwd = os.path.dirname(os.path.relpath(__file__))
         self.highscore_storage = cwd + "/" + HIGHSCORE_FILE
         with open(self.highscore_storage, 'a+') as f:
             f.seek(0)
