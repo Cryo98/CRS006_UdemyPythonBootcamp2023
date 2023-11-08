@@ -1,4 +1,5 @@
 from turtle import Turtle
+import os
 
 DEFAULT_FONT_NAME = "Arial"
 DEFAULT_FONT_SIZE = 12
@@ -23,11 +24,14 @@ class Scoreboard(Turtle):
         self.penup()
         self.color("white")
         self.goto(x=0, y=(window_height/2 - 2*font_size))
+
+        # Highscore and score initialization
         self.score = 0
-        with open(HIGHSCORE_FILE, 'a+') as f:
+        cwd = os.path.dirname(os.path.abspath(__file__))
+        self.highscore_storage = cwd + "/" + HIGHSCORE_FILE
+        with open(self.highscore_storage, 'a+') as f:
             f.seek(0)
             highscore_str = f.read()
-            print(highscore_str)
             if len(highscore_str) > 0:
                 self.highscore = int(highscore_str)
             else:
@@ -43,7 +47,7 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.highscore:
             self.highscore = self.score
-            with open(HIGHSCORE_FILE, 'w+') as f:
+            with open(self.highscore_storage, 'w+') as f:
                 f.write(str(self.highscore))
         self.score = 0
         self.update_score()
