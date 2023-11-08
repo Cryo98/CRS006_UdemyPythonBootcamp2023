@@ -9,6 +9,27 @@ HIGHSCORE_FILE = "highscore.txt"
 
 
 class Scoreboard(Turtle):
+    """Scoreboard that takes care of tracking the current score of the player.
+
+    The score is shown at the top of the window centered along the x axis,
+    showing a string of the form 'Score: N, Highscore: M'.
+    The 'GAME OVER' text is instead shown in the middle of the canvas, with
+    size doubled for the font.
+
+    Parameters
+    ----------
+    window_height : int
+        Height of the window in pixels.
+    font_size : int (optional)
+        Size of the font used, it is doubled for the 'GAME OVER' text (default
+        is 12).
+    font_name : str (optional)
+        Name of the font used (default is 'Arial').
+    font_type : str (optional)
+        Type of the font used (default is 'normal').
+    text_align : str (optional)
+        Alignment of the text (default is 'center').
+    """
 
     def __init__(self,
                  window_height: int,
@@ -39,12 +60,14 @@ class Scoreboard(Turtle):
         self.update_score()
 
     def update_score(self):
+        """Updates text on screen for score."""
         self.clear()
         self.write(f"Score: {self.score}, Highscore: {self.highscore}",
                    align=self.text_align,
                    font=self.font)
 
     def reset(self):
+        """Resets the score and saves highscore."""
         if self.score > self.highscore:
             self.highscore = self.score
             with open(self.highscore_storage, 'w+') as f:
@@ -53,11 +76,13 @@ class Scoreboard(Turtle):
         self.update_score()
 
     def print_game_over(self):
+        """Prints 'GAME OVER' in the middle of the screen."""
         self.goto(0, 0)
         self.write("GAME OVER",
                    align=self.text_align,
                    font=self.gameover_font)
 
     def increase_score(self):
+        """Increases the score and updates the one shown on screen."""
         self.score += 1
         self.update_score()
