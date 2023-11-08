@@ -34,3 +34,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 22 | Pong | Intermediate | <i>Overview</i> | turtle, random, time | *06/11/23* |
 | 23 | Turtle crossing game | Intermediate | <i>Overview</i> | turtle, random, time | *07/11/23* |
 | 24 | Mail merge | Intermediate | <i>Files handling</i> | os | *08/11/23* |
+| 25 | Geoname Guesser | Intermediate | <i>Pandas</i> | | | 
