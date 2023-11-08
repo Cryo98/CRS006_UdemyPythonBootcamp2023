@@ -33,4 +33,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 21 | Snake (part 2) | Intermediate | <i>Inheritance and slicing</i> | turtle, random | *04/11/23* |
 | 22 | Pong | Intermediate | <i>Overview</i> | turtle, random, time | *06/11/23* |
 | 23 | Turtle crossing game | Intermediate | <i>Overview</i> | turtle, random, time | *07/11/23* |
-| 24 | Mail merge | Intermediate | <i>Files handling</i> | | |
+| 24 | Mail merge | Intermediate | <i>Files handling</i> | os | *08/11/23* |
