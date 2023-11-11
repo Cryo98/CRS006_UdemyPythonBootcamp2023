@@ -35,4 +35,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 23 | Turtle crossing game | Intermediate | <i>Overview</i> | turtle, random, time | *07/11/23* |
 | 24 | Mail merge | Intermediate | <i>Files handling</i> | os | *08/11/23* |
 | 25 | Geoname Guesser | Intermediate | <i>Pandas</i> | os, pandas, turtle | *11/11/23* | 
-| 26 | NATO phonetic alphabet | Intermediate | <i>List and dictionary comprehension</i> | | |
+| 26 | NATO phonetic alphabet | Intermediate | <i>List and dictionary comprehension</i> | os, pandas | *11/11/23* |
