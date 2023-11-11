@@ -1,3 +1,12 @@
+# NATO PHONETIC ALPHABET
+# Converts a given word into the spelled version with the NATO phonetic
+# alphabet
+# ---------------------------------------------------------------------
+# [X] Load phonetic alphabet
+# [X] Convert the alphabet into a dictionary with dict comprehension
+# [X] Get user input
+# [X] Convert input into phonetic list
+
 import os
 import pandas as pd
 
