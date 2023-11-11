@@ -13,6 +13,7 @@ import pandas as pd
 # CONSTANTS
 BACKGROUND_IMAGE = "blank_states_img.gif"
 STATES_POSITIONS = "50_states.csv"
+REVIEW_FILE = "states_to_learn.csv"
 FONT_NAME = "Arial"
 FONT_SIZE = 8
 
@@ -55,17 +56,19 @@ while len(correct_guesses) < len(states_data):
         break
 
     # Answer evaluation
+    if user_input == "Exit":
+        break
     if user_input in correct_guesses:
-        # Guess already tried, updates the flags
+        # Guess already tried
         is_previous_already_guessed = True
         is_previous_wrong = False
-    if user_input not in states_data["state"].values:
-        # Guess not correct, updates the flags
+    elif user_input not in states_data["state"].values:
+        # Guess not correct
         is_previous_wrong = True
         is_previous_already_guessed = False
     else:
-        # Add guessed state to list to check double entries
         correct_guesses.append(user_input)
+
         # Create text to the correct spot as per data
         text_turtle = t.Turtle(visible=False)
         text_turtle.penup()
@@ -77,12 +80,16 @@ while len(correct_guesses) < len(states_data):
             user_input,
             align="center",
             font=(FONT_NAME, FONT_SIZE, "normal"))
-        # Track score
+
         score += 1
-        # Update flags
         is_previous_wrong = False
 
 if score == len(states_data):
     print("Good job! You guessed every state!")
+else:
+    # Saves the countries not learned in another .csv file
+    review_path = cwd + "/" + REVIEW_FILE
+    states_to_learn = states_data[~states_data["state"].isin(correct_guesses)]
+    states_to_learn["state"].to_csv(review_path)
 
 t.bye()
