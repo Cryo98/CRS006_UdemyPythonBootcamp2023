@@ -38,4 +38,5 @@ The programs range from beginner to professional level, with the aim of improvin
 | 26 | NATO phonetic alphabet | Intermediate | <i>List and dictionary comprehension</i> | os, pandas | *11/11/23* |
 | 27 | Unit converter | Intermediate | <i>Tkinter GUI, advanced arguments</i> | tkinter | *13/11/23* |
 | 28 | Pomodoro timer | Intermediate | <i>Tkinter, dynamic typing</i> | tkinter, os | *14/11/23* |
-| 29 | Password manager | Intermediate | <i>Columnspan, messageboxes</i> | tkinter, os, random, pyperclip | *15/11/23* |
+| 29 | Password manager (part 1) | Intermediate | <i>Columnspan, messageboxes</i> | tkinter, os, random, pyperclip | *15/11/23* |
+| 30 | Password manager (part 2) | Intermediate | <i>Error handling and JSON</i> | | |
