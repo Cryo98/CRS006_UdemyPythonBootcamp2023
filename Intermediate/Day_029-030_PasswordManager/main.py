@@ -6,14 +6,16 @@
 # [X] Add logo
 # [X] Add GUI elements
 # [X] Generate random password
-# [X] Save data into file
-# [ ] Save password into clipboard
+# [ ] Save data into file as JSON
+# [X] Save password into clipboard
+# [ ] Add search function
 
 import tkinter as tk
 from tkinter import messagebox
 import os
 import random
 import pyperclip
+import json
 
 
 # CONSTANTS
@@ -43,6 +45,12 @@ def save_credentials():
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": password
+        }
+    }
 
     # Error message for empty fields
     if password == "" or email == "" or website == "":
@@ -60,8 +68,12 @@ def save_credentials():
 
     # Saving credentials in the database and clearing GUI elements
     if confirmed_save:
-        with open(database_path, "a") as db:
-            db.write(f"{website} | {email} | {password}\n")
+        with open(database_path, "r") as db:
+            # try:
+            data = json.load(db)
+            data.update(new_data)
+        with open(database_path, "w") as db:
+            json.dump(data, db)
         website_entry.delete(0, tk.END)
         password_entry.delete(0, tk.END)
         messagebox.showinfo(
@@ -87,6 +99,11 @@ def generate_password():
     pyperclip.copy(password_str)
 
 
+def search_database():
+    database_path = cwd + "/" + DATABASE_FILE
+    website = website_entry.get()
+
+
 # Initialize window
 cwd = os.path.dirname(os.path.relpath(__file__))
 window = tk.Tk()
@@ -109,8 +126,8 @@ password_label = tk.Label(text="Password:")
 password_label.grid(row=3, column=0, sticky="E")
 
 # Entries
-website_entry = tk.Entry(width=50)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = tk.Entry(width=30)
+website_entry.grid(row=1, column=1)
 website_entry.focus()
 email_entry = tk.Entry(width=50)
 email_entry.grid(row=2, column=1, columnspan=2)
@@ -125,6 +142,8 @@ generate_password_button.config(command=generate_password)
 add_to_database_button = tk.Button(text="Add", width=42)
 add_to_database_button.grid(row=4, column=1, columnspan=2)
 add_to_database_button.config(command=save_credentials)
+search_in_database_button = tk.Button(text="Search", width=15)
+search_in_database_button.grid(row=1, column=2)
 
 
 window.mainloop()
