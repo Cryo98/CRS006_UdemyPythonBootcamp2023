@@ -6,9 +6,9 @@
 # [X] Add logo
 # [X] Add GUI elements
 # [X] Generate random password
-# [ ] Save data into file as JSON
+# [X] Save data into file as JSON
 # [X] Save password into clipboard
-# [ ] Add search function
+# [X] Add search function
 
 import tkinter as tk
 from tkinter import messagebox
@@ -42,7 +42,7 @@ PASSWORD_N_SYMBOLS = 1
 def save_credentials():
     """Save credentials into a local database."""
     database_path = cwd + "/" + DATABASE_FILE
-    website = website_entry.get()
+    website = website_entry.get().title()
     email = email_entry.get()
     password = password_entry.get()
     new_data = {
@@ -68,12 +68,15 @@ def save_credentials():
 
     # Saving credentials in the database and clearing GUI elements
     if confirmed_save:
-        with open(database_path, "r") as db:
-            # try:
-            data = json.load(db)
-            data.update(new_data)
+        # Handles non-existent file
+        try:
+            with open(database_path, "r") as db:
+                data = json.load(db)
+                data.update(new_data)
+        except FileNotFoundError:
+            data = new_data
         with open(database_path, "w") as db:
-            json.dump(data, db)
+            json.dump(data, db, indent=4)
         website_entry.delete(0, tk.END)
         password_entry.delete(0, tk.END)
         messagebox.showinfo(
@@ -90,8 +93,10 @@ def generate_password():
     The amount of letters, symbols and numbers are based on the constants at
     the beginning of the scripts."""
     password_list = [random.choice(LETTERS) for _ in range(PASSWORD_N_LETTERS)]
-    password_list.extend([random.choice(SYMBOLS) for _ in range(PASSWORD_N_SYMBOLS)])
-    password_list.extend([random.choice(NUMBERS) for _ in range(PASSWORD_N_NUMBERS)])
+    symbols_list = [random.choice(SYMBOLS) for _ in range(PASSWORD_N_SYMBOLS)]
+    numbers_list = [random.choice(NUMBERS) for _ in range(PASSWORD_N_NUMBERS)]
+    password_list.extend(symbols_list)
+    password_list.extend(numbers_list)
     random.shuffle(password_list)
     password_str = "".join(password_list)
     password_entry.delete(0, tk.END)
@@ -100,8 +105,45 @@ def generate_password():
 
 
 def search_database():
+    """Search within the database for password and email for the website
+    present in the website entry.
+
+    It loads from the database, showing an error window if the database has
+    yet to be created.
+    Loading and searching within the data, it shows an info window if the
+    credentials for the required website are not available, else it copies
+    the credentials in the entries and the password within the clipboard.
+    """
     database_path = cwd + "/" + DATABASE_FILE
-    website = website_entry.get()
+    website = website_entry.get().title()
+    try:
+        with open(database_path, "r") as db:
+            data = json.load(db)
+    except FileNotFoundError:
+        messagebox.showerror(
+            title="Empty Database",
+            message="The database is currently empty, "
+                    "add credentials to start."
+        )
+    else:
+        if website in data:
+            website_data = data[website]
+            # Inserts loaded data into entries and clipboard
+            email_entry.delete(0, tk.END)
+            email_entry.insert(0, website_data["email"])
+            password_entry.delete(0, tk.END)
+            password_entry.insert(0, website_data["password"])
+            pyperclip.copy(website_data["password"])
+            messagebox.showinfo(
+                title="Credentials loaded",
+                message=f"Credentials loaded for website '{website}'"
+            )
+        else:
+            messagebox.showinfo(
+                title="Unavailable credentials",
+                message="No credentials are saved for the website"
+                        f" '{website}' within the database."
+            )
 
 
 # Initialize window
@@ -129,8 +171,8 @@ password_label.grid(row=3, column=0, sticky="E")
 website_entry = tk.Entry(width=30)
 website_entry.grid(row=1, column=1)
 website_entry.focus()
-email_entry = tk.Entry(width=50)
-email_entry.grid(row=2, column=1, columnspan=2)
+email_entry = tk.Entry(width=51)
+email_entry.grid(row=2, column=1, columnspan=2, sticky="e")
 email_entry.insert(0, COMMON_EMAIL)
 password_entry = tk.Entry(width=30)
 password_entry.grid(row=3, column=1)
@@ -139,11 +181,18 @@ password_entry.grid(row=3, column=1)
 generate_password_button = tk.Button(text="Generate Password", width=15)
 generate_password_button.grid(row=3, column=2)
 generate_password_button.config(command=generate_password)
-add_to_database_button = tk.Button(text="Add", width=42)
-add_to_database_button.grid(row=4, column=1, columnspan=2)
+add_to_database_button = tk.Button(text="Add", width=43)
+add_to_database_button.grid(row=4, column=1, columnspan=2, sticky="e")
 add_to_database_button.config(command=save_credentials)
 search_in_database_button = tk.Button(text="Search", width=15)
 search_in_database_button.grid(row=1, column=2)
+search_in_database_button.config(command=search_database)
+
+width = window.winfo_width()
+height = window.winfo_height()
+print(width)
+print(height)
+window.minsize(width, height)
 
 
 window.mainloop()
