@@ -13,21 +13,29 @@
 import pandas as pd
 import os
 import tkinter as tk
-from random import randint, choice
+import random
 
-# CONSTANTS
+# folder where all the words are stored
 DATA_FOLDER = "data"
+# basic vocabulary file
 VOCABULARY = "words_to_learn.csv"
+# substitute vocabulary if base one is not available
 VOCABULARY_INIT = "french_words.csv"
+# headers within vocabulary for languages
 LANGUAGE_TO_LEARN = "French"
 LANGUAGE_BASE = "English"
+# folder containing the resource images
 IMAGES_FOLDER = "images"
 IMAGE_CARD_BACK = "card_back.png"
 IMAGE_CARD_FRONT = "card_front.png"
 IMAGE_BUTTON_RIGHT = "right.png"
 IMAGE_BUTTON_WRONG = "wrong.png"
+# Font for the word in language on the card
 FONT_WORD = ("Arial", 60, "bold")
+# Font for the language shown on the card
 FONT_LANGUAGE = ("Arial", 40, "italic")
+# Background color
+# NOTE: images are built to have a shadow correct only with this color
 COLOR_BACKGROUND = "#B1DDC6"
 
 # # Convert original txt file into csv
@@ -43,7 +51,7 @@ COLOR_BACKGROUND = "#B1DDC6"
 # s = pd.Series(words_list, name=LANGUAGE)
 # s.to_csv(cwd + f"/{LANGUAGE}_{WORDS}.csv", encoding="utf-8", index=False)
 
-# INITIALIZATION FOR GLOBAL PARAMETERS
+
 # ID for scheduled card flip
 auto_flip = ""
 # Current card idx from the dataset
@@ -64,7 +72,7 @@ def update_word():
     # that the dataframe considers not available, however it appears within
     # the dataframe, the element that is dropped at the 'correct_guess'
     # function is correctly removed and I am not sure why this happens
-    current_card_idx = choice(vocabulary.index)
+    current_card_idx = random.choice(vocabulary.index)
     # Updates the image and text on the canvas
     canvas.itemconfig(
         background_image,
@@ -123,7 +131,8 @@ window.title("Flash cards")
 window.config(padx=50, pady=50, bg=COLOR_BACKGROUND)
 
 # Canvas containing the card
-canvas = tk.Canvas(width=800, height=526, bg=COLOR_BACKGROUND, highlightthickness=0)
+canvas = tk.Canvas(width=800, height=526,
+                   bg=COLOR_BACKGROUND, highlightthickness=0)
 card_front_path = os.path.join(cwd, IMAGES_FOLDER, IMAGE_CARD_FRONT)
 card_front_background = tk.PhotoImage(file=card_front_path)
 card_back_path = os.path.join(cwd, IMAGES_FOLDER, IMAGE_CARD_BACK)
@@ -151,5 +160,6 @@ wrong_button.config(command=update_word)
 
 window.mainloop()
 
+# Saves the dataframe with all the words guessed removed
 save_file_path = os.path.join(cwd, DATA_FOLDER, VOCABULARY)
 vocabulary.to_csv(save_file_path, encoding="utf-8", index=False)
