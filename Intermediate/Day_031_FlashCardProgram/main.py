@@ -5,10 +5,10 @@
 # [X] Add canvas for card
 # [X] Add buttons
 # [X] Rotation between languages function
-# [ ] Correct guess function
-# [ ] Wrong guess function
+# [X] Correct guess function
+# [X] Wrong guess function
 # [X] Load data from csv
-# [ ] Save data to csv for next usage
+# [X] Save data to csv for next usage
 
 import pandas as pd
 import os
