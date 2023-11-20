@@ -68,10 +68,6 @@ def update_word():
         window.after_cancel(auto_flip)
     except ValueError:
         pass
-    # BUG: somehow random choice from the index sometimes returns an index
-    # that the dataframe considers not available, however it appears within
-    # the dataframe, the element that is dropped at the 'correct_guess'
-    # function is correctly removed and I am not sure why this happens
     current_card_idx = random.choice(vocabulary.index)
     # Updates the image and text on the canvas
     canvas.itemconfig(
@@ -113,6 +109,8 @@ def flip_card():
 def correct_guess():
     """Removes the word from the dictionary"""
     vocabulary.drop(current_card_idx, inplace=True)
+    # clears the unused indexes of the RangeIndex class
+    vocabulary.reset_index(drop=True, inplace=True)
     update_word()
 
 
