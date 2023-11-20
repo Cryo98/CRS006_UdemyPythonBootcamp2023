@@ -190,8 +190,6 @@ search_in_database_button.config(command=search_database)
 
 width = window.winfo_width()
 height = window.winfo_height()
-print(width)
-print(height)
 window.minsize(width, height)
 
 
