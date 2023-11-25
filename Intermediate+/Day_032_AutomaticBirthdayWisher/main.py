@@ -1,18 +1,33 @@
 # AUTOMATIC BIRTHDAY WISHER
-# Uses SMTP and datetime to send an automatic email with birthday wishes
+# Uses SMTP and datetime to send a mail to the contacts within a csv on the
+# specified date
+# -------------------------------------------------------------------------
+# - [X] Load data from csv
+# - [X] Start SMTP connection
+# - [ ] Prepare email text
+# - [ ] Date check to send mail
 
+import pandas as pd
 import smtplib
+import datetime as dt
+from pathlib import Path
+import configparser
 
+# CSV containing birthdays and contacts
+BIRTHDAYS_CSV = "birthdays.csv"
+ACCOUNT_DATA = "email.ini"
 
-# CONSTANTS
-MY_EMAIL = "test1@gmail.com"
-TEST_EMAIL = "test2@gmail.com"
-PASS = "this_is_a_fake_password"
+cwd = Path(__file__).parent
 
-connection = smtplib.SMTP("smtp.gmail.com")
-# Encription for the connection
-connection.starttls()
-# NOTE: Need to set 2-step verification and then get an "App password" to use for this
-connection.login(user=MY_EMAIL, password=PASS)
-# connection.sendmail(from_addr=MY_EMAIL, to_addrs=TEST_EMAIL, msg="Test")
-connection.close()
+# Load credentials
+config = configparser.ConfigParser()
+config.read(cwd/ACCOUNT_DATA)
+sender_email = config["SENDER"]["email"]
+sender_password = config["SENDER"]["password"]
+
+# Read birthdays from file
+data = pd.read_csv(cwd/BIRTHDAYS_CSV, header=0)
+
+with smtplib.SMTP("smtp.gmail.com") as server:
+    server.starttls()
+    server.login(user=sender_email, password=sender_password)
