@@ -41,4 +41,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 29  | Password manager (part 1) | Intermediate  | <i>Columnspan, messageboxes</i>               | tkinter, os, random, pyperclip | *15/11/23*      | 
 | 30  | Password manager (part 2) | Intermediate  | <i>Error handling and JSON</i>                | tkinter, json                  | *17/11/23*      | 
 | 31  | Flash card program        | Intermediate  | <i>Overview</i>                               | pandas, os, tkinter, random | *19/11/23* |
-| 32  | Automatic Birthday Wisher | Intermediate+ | <i>Email SMTP, datetime module</i>            | | |
+| 32  | Automatic Birthday Wisher | Intermediate+ | <i>Email SMTP, datetime module</i>            | pandas, smptlib, datetime, pathlib, configparser, random| *25/11/23* |
