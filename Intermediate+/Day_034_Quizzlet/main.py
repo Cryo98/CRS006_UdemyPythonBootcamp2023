@@ -1,14 +1,19 @@
-# QUIZZLET
-# Using the "Open Trivia Databse" (<https://opentdb.com>) to create a simple
-# quiz game with GUI
+from question_model import Question
+from data import get_questions
+from quiz_brain import QuizBrain
 
-import requests
-import tkinter as tk
+question_bank = []
+for question in get_questions(10):
+    question_text = question["question"]
+    question_answer = question["correct_answer"]
+    new_question = Question(question_text, question_answer)
+    question_bank.append(new_question)
 
 
-def main():
-    pass
+quiz = QuizBrain(question_bank)
 
+while quiz.still_has_questions():
+    quiz.next_question()
 
-if __name__ == "__main__":
-    main()
+print("You've completed the quiz")
+print(f"Your final score was: {quiz.score}/{quiz.question_number}")
