@@ -9,9 +9,9 @@ def get_questions(n_questions: int = 10, type: str = "boolean"):
         "type": type,
     }
 
-    response = requests.get(url=TRIVIA_DATABASE_ENDPOINT, params=parameters).json()
-    # questions = [{"text": question["question"], "answer": question["correct_answer"]} for question in response["results"]]
-    questions = response["results"]
+    response = requests.get(url=TRIVIA_DATABASE_ENDPOINT, params=parameters)
+    response_json = response.json()
+    questions = response_json["results"]
     return questions
 
 
