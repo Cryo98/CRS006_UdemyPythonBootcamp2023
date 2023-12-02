@@ -6,6 +6,7 @@
 from pathlib import Path
 from configparser import ConfigParser
 import requests
+from twilio.rest import Client
 
 cwd = Path(__file__).parent
 
@@ -17,9 +18,16 @@ API_ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
 
 config = ConfigParser()
 config.read(cwd/CONFIG_FILE)
-latitude = config["LOCATION"]["latitude"]
-longitude = config["LOCATION"]["longitude"]
+# Personalization
+latitude = config["PERSONAL"]["latitude"]
+longitude = config["PERSONAL"]["longitude"]
+my_phone = config["PERSONAL"]["phone_number"]
+# OpenWeatherMap
 api_key = config["OPENWEATHER"]["api_key"]
+#Twilio
+twilio_sid = config["TWILIO"]["account_sid"]
+twilio_auth = config["TWILIO"]["auth_token"]
+twilio_phone = config["TWILIO"]["phone_number"]
 
 params = {
     "lat": latitude,
@@ -44,10 +52,17 @@ def is_umbrella_needed(weather_data):
     return False
 
 
+def send_message(message):
+    client = Client(twilio_sid, twilio_auth)
+    message = client.messages.create(body=message, to=my_phone, from_=twilio_phone)
+    print(message.status)
+
+
 def main():
     weather_data = get_weather_data()
     if is_umbrella_needed(weather_data):
         print("Bring an umbrella ☔")
+        send_message("Bring an umbrella ☔")
     else:
         print("No need for an umbrella today!")
 
