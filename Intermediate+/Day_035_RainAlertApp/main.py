@@ -7,14 +7,13 @@ from pathlib import Path
 from configparser import ConfigParser
 import requests
 from twilio.rest import Client
+import os
 
 cwd = Path(__file__).parent
 
 CONFIG_FILE = "config.ini"
 # 5 days forecast with intervals of 3 hours
 API_ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
-# current weather
-# API_ENDPOINT = "https://api.openweathermap.org/data/2.5/weather"
 
 config = ConfigParser()
 config.read(cwd/CONFIG_FILE)
@@ -23,11 +22,11 @@ latitude = config["PERSONAL"]["latitude"]
 longitude = config["PERSONAL"]["longitude"]
 my_phone = config["PERSONAL"]["phone_number"]
 # OpenWeatherMap
-api_key = config["OPENWEATHER"]["api_key"]
-#Twilio
-twilio_sid = config["TWILIO"]["account_sid"]
-twilio_auth = config["TWILIO"]["auth_token"]
-twilio_phone = config["TWILIO"]["phone_number"]
+api_key = os.environ.get("OWM_API_KEY")
+# Twilio
+twilio_sid = os.environ.get("TWILIO_SID")
+twilio_auth = os.environ.get("TWILIO_AUTH_TOKEN")
+twilio_phone = os.environ.get("TWILIO_PHONE")
 
 params = {
     "lat": latitude,
