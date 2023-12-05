@@ -44,5 +44,5 @@ The programs range from beginner to professional level, with the aim of improvin
 | 32  | Automatic Birthday Wisher | Intermediate+ | <i>Email SMTP, datetime module</i>            | pandas, smptlib, datetime, pathlib, configparser, random | *25/11/23* |
 | 33  | ISS tracker               | Intermediate+ | <i>API</i>                                    | requests, datetime, smtplib, time | *28/11/23* |
 | 34  | Quizzlet                  | Intermediate+ | <i>API and GUI review</i>                     | requests, tkinter | *30/11/23* |
-| 35  | Rain Alert App            | Intermediate+ | <i>Authentication and environment variables </i> | requests, twilio, os | *03/11/23* |
-| 36  | Bloomberg Terminal        | Intermediate+ | <i>API overview</i> | | |
+| 35  | Rain Alert App            | Intermediate+ | <i>Authentication and environment variables </i> | requests, twilio, os | *03/12/23* |
+| 36  | Bloomberg Terminal        | Intermediate+ | <i>API overview</i> | requests, twilio, os | *05/12/23* |
