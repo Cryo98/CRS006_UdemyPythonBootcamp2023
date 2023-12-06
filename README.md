@@ -46,4 +46,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 34  | Quizzlet                  | Intermediate+ | <i>API and GUI review</i>                     | requests, tkinter | *30/11/23* |
 | 35  | Rain Alert App            | Intermediate+ | <i>Authentication and environment variables</i> | requests, twilio, os | *03/12/23* |
 | 36  | Bloomberg Terminal        | Intermediate+ | <i>API overview</i> | requests, twilio, os | *05/12/23* |
-| 37  | Habit Tracker             | Intermediate+ | <i>Advanced authentication and API methods</i> | | |
+| 37  | Habit Tracker             | Intermediate+ | <i>Advanced authentication and API methods</i> | requests | *06/12/23* |
