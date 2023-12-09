@@ -47,4 +47,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 35  | Rain Alert App            | Intermediate+ | <i>Authentication and environment variables</i> | requests, twilio, os | *03/12/23* |
 | 36  | Bloomberg Terminal        | Intermediate+ | <i>API overview</i> | requests, twilio, os | *05/12/23* |
 | 37  | Habit Tracker             | Intermediate+ | <i>Advanced authentication and API methods</i> | requests | *06/12/23* |
-| 38  | Exercise Tracker          | Intermediate+ | <i>API, Excel</i>                              | | |
+| 38  | Exercise Tracker          | Intermediate+ | <i>API, Google Sheets</i>                      | requests, dotenv | *09/12/23* |
