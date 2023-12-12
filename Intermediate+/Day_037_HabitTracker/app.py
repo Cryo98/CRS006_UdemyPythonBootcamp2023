@@ -8,10 +8,11 @@ class HabitTracker(tk.Tk):
         self.title("Habit Tracker")
         self.geometry("500x700")
         self.mainloop()
-   
+
     def __init_graph_canvas(self):
         """Initializes the canvas showing the graph"""
-        pass
+        self.graph = tk.Canvas(width=400, height=200)
+        self.graph.grid(column=0, row=0)
 
     def __init_buttons(self):
         """Initializes the control buttons"""
