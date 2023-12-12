@@ -45,6 +45,7 @@ The programs range from beginner to professional level, with the aim of improvin
 | 33  | ISS tracker               | Intermediate+ | <i>API</i>                                    | requests, datetime, smtplib, time | *28/11/23* |
 | 34  | Quizzlet                  | Intermediate+ | <i>API and GUI review</i>                     | requests, tkinter | *30/11/23* |
 | 35  | Rain Alert App            | Intermediate+ | <i>Authentication and environment variables</i> | requests, twilio, os | *03/12/23* |
-| 36  | Bloomberg Terminal        | Intermediate+ | <i>API overview</i> | requests, twilio, os | *05/12/23* |
-| 37  | Habit Tracker             | Intermediate+ | <i>Advanced authentication and API methods</i> | requests | *06/12/23* |
-| 38  | Exercise Tracker          | Intermediate+ | <i>API, Google Sheets</i>                      | requests, dotenv | *09/12/23* |
+| 36  | Bloomberg Terminal          | Intermediate+ | <i>API overview</i> | requests, twilio, os | *05/12/23* |
+| 37  | Habit Tracker               | Intermediate+ | <i>Advanced authentication and API methods</i> | requests | *06/12/23* |
+| 38  | Exercise Tracker            | Intermediate+ | <i>API, Google Sheets</i>                      | requests, dotenv | *09/12/23* |
+| 39  | Flight Deal Finder (part 1) | Intermediate+ | <i>APIs overview</i> | | |
