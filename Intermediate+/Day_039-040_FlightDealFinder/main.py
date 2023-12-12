@@ -1,1 +1,10 @@
-#This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
+# This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
+from dotenv import load_dotenv
+from data_manager import DataManager
+import os
+
+if __name__ == "__main__":
+    load_dotenv()
+    data_manager = DataManager()
+    data_manager.set_authentication(os.environ.get("SHEETY_TOKEN", ""))
+    data_manager.set_sheet(os.environ.get("SHEETY_URL", ""))
