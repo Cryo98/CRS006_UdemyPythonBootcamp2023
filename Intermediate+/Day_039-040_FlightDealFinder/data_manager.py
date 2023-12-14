@@ -1,3 +1,5 @@
+import requests
+
 SHEETY_ENDPOINT = "https://api.sheety.co/"
 
 
@@ -11,18 +13,31 @@ class DataManager:
 
     def set_authentication(self, token):
         self.token = token
+        self.header = {"Authorization": f"Bearer {token}"}
         self.authentication_set = True
 
     def set_sheet(self, url):
         self.url = SHEETY_ENDPOINT + url
         self.sheet_set = True
 
+    def get_data(self):
+        response = requests.get(self.url)
+        return response
+
     def check_response(self, func):
-        """Checks"""
-        def run_until(kwargs):
-            status_code = 503
-            while status_code == 503:
+        """Checks the response from a HTTP request and handles errors."""
+        def request_checked(kwargs):
+            response: requests.Response
+            if not self.authentication_set or not self.sheet_set:
+                print("No valid authentication and sheet have been chosen.")
+                print("Please set them using 'set_authentication' and 'set_sheet'.")
+                return None
+            try:
                 response = func(**kwargs)
-                status_code = response.status_code
-            return response
-        return run_until
+                response.raise_for_status()
+            except requests.HTTPError:
+                if response.status_code == 401:
+                    print("Invalid authorization, please insert the correct token.")
+            finally:
+                return response
+        return request_checked
