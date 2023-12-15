@@ -21,7 +21,7 @@ class DataManager:
         self.sheet_set = True
 
     def get_data(self):
-        response = requests.get(self.url)
+        response = requests.get(self.url, headers=self.header)
         return response
 
     def check_response(self, func):
