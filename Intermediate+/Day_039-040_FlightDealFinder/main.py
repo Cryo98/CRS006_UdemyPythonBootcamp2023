@@ -12,4 +12,5 @@ if __name__ == "__main__":
     # print(data_manager.get_data().json())
     search = FlightSearch()
     search.set_key(os.environ.get("TEQUILA_API_KEY", ""))
-    print(search.query("London").status_code)
+    print(search.query("London").json()["locations"][0]["code"])
+    print(search.query("Paris").json()["locations"][0]["code"])

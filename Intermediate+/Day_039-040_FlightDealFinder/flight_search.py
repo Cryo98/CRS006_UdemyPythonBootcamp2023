@@ -19,5 +19,5 @@ class FlightSearch:
             "location_types": "city",
             "limit": 1,
         }
-        response = requests.get(url=TEQUILA_ENDPOINT, params=params, headers=self.header)
+        response = requests.get(url=TEQUILA_ENDPOINT + "locations/query", params=params, headers=self.header)
         return response
