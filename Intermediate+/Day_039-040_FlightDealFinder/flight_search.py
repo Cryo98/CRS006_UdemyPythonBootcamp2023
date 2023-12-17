@@ -13,6 +13,10 @@ class FlightSearch:
         self.api_key = key
         self.header = {"apikey": key}
 
+    def get_city_code(self, city) -> str:
+        response = self.query(term=city)
+        return response.json()["locations"][0]["code"]
+
     def query(self, term) -> requests.Response:
         params = {
             "term": term,
