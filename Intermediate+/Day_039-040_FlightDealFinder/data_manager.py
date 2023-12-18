@@ -25,13 +25,14 @@ class DataManager:
         return response
 
     def set_data(self, row: int, column: str, data) -> requests.Response:
-        print(self.url + f"/{row}")
         header = self.header
         header["Content-Type"] = "application/json"
         body = {
-            column: data,
+            "price": {
+                column: data,
+            }
         }
-        response = requests.post(self.url + f"/{row}", json=body, headers=header)
+        response = requests.put(self.url + f"/{row}", json=body, headers=header)
         return response
 
     def check_response(self, func):
