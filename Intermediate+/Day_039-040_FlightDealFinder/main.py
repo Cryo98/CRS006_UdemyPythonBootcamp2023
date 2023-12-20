@@ -3,10 +3,12 @@
 from dotenv import load_dotenv
 from flight_data import FlightData
 from flight_search import FlightSearch
+from datetime import datetime, timedelta
 import os
 
 
 TOKENLESS = True
+IATA_FROM = "MIL"
 
 
 if __name__ == "__main__":
@@ -84,3 +86,17 @@ if __name__ == "__main__":
             data[idx]["iataCode"] = iata_code
             if not TOKENLESS:
                 data_manager.set_iata_code(code=iata_code, idx=idx)
+
+    for city_data in data:
+        print(f"Checking flights to {city_data['city']}...")
+        flight_data = search.get_cheapest_flight(
+            from_city_iata=IATA_FROM,
+            to_city_iata=city_data["iataCode"],
+            from_date=datetime.today() + timedelta(days=1),
+            to_date=timedelta(weeks=25)
+            )
+        if flight_data["price"] > city_data["lowestPrice"]:
+            print("Found a cheap flight!\n")
+            search.pprint_flight_data(flight_data)
+        else:
+            print("No cheap flight found.")
