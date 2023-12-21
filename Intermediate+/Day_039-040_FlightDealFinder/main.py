@@ -3,6 +3,7 @@
 from dotenv import load_dotenv
 from flight_data import FlightData
 from flight_search import FlightSearch
+from notification_manager import NotificationManager
 from datetime import datetime, timedelta
 import os
 
@@ -87,6 +88,14 @@ if __name__ == "__main__":
             if not TOKENLESS:
                 data_manager.set_iata_code(code=iata_code, idx=idx)
 
+    # Start notification manager
+    notifier = NotificationManager(
+        auth_token=os.environ.get("TWILIO_AUTH_TOKEN", ""),
+        account_sid=os.environ.get("TWILIO_ACCOUNT_SID", ""),
+        phone_number=os.environ.get("TWILIO_PHONE_NUMBER", ""),
+        receiver_number=os.environ.get("PERSONAL_PHONE_NUMBER", "")
+    )
+
     for city_data in data:
         print(f"Checking flights to {city_data['city']}...")
         flight_data = search.get_cheapest_flight(
@@ -98,5 +107,13 @@ if __name__ == "__main__":
         if flight_data["price"] > city_data["lowestPrice"]:
             print("Found a cheap flight!\n")
             search.pprint_flight_data(flight_data)
+            notifier.price_alert(
+                iata_departure=flight_data["flyFrom"],
+                departure_city=flight_data["cityFrom"],
+                iata_arrival=flight_data["flyTo"],
+                arrival_city=flight_data["cityTo"],
+                departure_date=datetime.fromtimestamp(flight_data['dTime']).strftime('%Y-%m-%d'),
+                flight_cost=flight_data["price"]
+            )
         else:
             print("No cheap flight found.")
