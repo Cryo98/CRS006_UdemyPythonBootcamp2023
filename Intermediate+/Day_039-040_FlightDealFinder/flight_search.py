@@ -17,7 +17,7 @@ class FlightSearch:
     def get_city_code(self, city) -> str:
         response = self.query(term=city)
         return response.json()["locations"][0]["code"]
-    
+
     def get_cheapest_flight(
             self,
             from_city_iata: str,

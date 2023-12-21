@@ -48,4 +48,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 36  | Bloomberg Terminal          | Intermediate+ | <i>API overview</i> | requests, twilio, os | *05/12/23* |
 | 37  | Habit Tracker               | Intermediate+ | <i>Advanced authentication and API methods</i> | requests | *06/12/23* |
 | 38  | Exercise Tracker            | Intermediate+ | <i>API, Google Sheets</i>                      | requests, dotenv | *09/12/23* |
-| 39  | Flight Deal Finder (part 1) | Intermediate+ | <i>APIs overview</i> | | |
+| 39  | Flight Deal Finder (part 1) | Intermediate+ | <i>APIs overview</i> | requests, twilio, dotenv | *21/12/23* |
