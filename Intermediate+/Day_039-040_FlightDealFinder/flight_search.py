@@ -67,6 +67,10 @@ class FlightSearch:
         print(f"Flight Duration: {flight_duration}")
         print(f"Airline Company: {airline_company}")
         print(f"Flight Cost: €{flight_cost}")
+        if len(flight_info["route"]) > 1:
+            print(f"\nThis flight has {len(flight_info['route'])-1} stop over{'s' if len(flight_info['route']) > 2 else ''}")
+            for i in range(len(flight_info['route'])-1):
+                print(f"  - {flight_info['route'][i]['cityTo']}")
         print("============================================")
 
     def query(self, term) -> requests.Response:
