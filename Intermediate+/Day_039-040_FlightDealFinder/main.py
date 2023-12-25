@@ -104,16 +104,17 @@ if __name__ == "__main__":
             from_date=datetime.today() + timedelta(days=1),
             to_date=timedelta(weeks=25)
             )
-        if flight_data["price"] > city_data["lowestPrice"]:
+        if flight_data is None or flight_data["price"] > city_data["lowestPrice"]:
+            print("No cheap flight found.")
+        else:
             print("Found a cheap flight!\n")
             search.pprint_flight_data(flight_data)
-            notifier.price_alert(
-                iata_departure=flight_data["flyFrom"],
-                departure_city=flight_data["cityFrom"],
-                iata_arrival=flight_data["flyTo"],
-                arrival_city=flight_data["cityTo"],
-                departure_date=datetime.fromtimestamp(flight_data['dTime']).strftime('%Y-%m-%d'),
-                flight_cost=flight_data["price"]
-            )
-        else:
-            print("No cheap flight found.")
+            if not TOKENLESS:
+                notifier.price_alert(
+                    iata_departure=flight_data["flyFrom"],
+                    departure_city=flight_data["cityFrom"],
+                    iata_arrival=flight_data["flyTo"],
+                    arrival_city=flight_data["cityTo"],
+                    departure_date=datetime.fromtimestamp(flight_data['dTime']).strftime('%Y-%m-%d'),
+                    flight_cost=flight_data["price"]
+                )
