@@ -24,7 +24,7 @@ class FlightSearch:
             to_city_iata: str,
             from_date: datetime = datetime.today(),
             to_date: datetime | timedelta = timedelta(weeks=4)
-            ) -> dict:
+            ) -> dict | None:
         # TODO: missing check if `to_date` is before `from_date`
         # TODO: missing datatype validation
         to_date = from_date + to_date if type(to_date) is timedelta else to_date
@@ -40,7 +40,11 @@ class FlightSearch:
             params=param,
             headers=self.header
             )
-        return response.json()["data"][0]
+        try:
+            cheapest_flight = response.json()["data"][0]
+        except IndexError:
+            cheapest_flight = None
+        return cheapest_flight
 
     @staticmethod
     def pprint_flight_data(flight_info: dict) -> None:
