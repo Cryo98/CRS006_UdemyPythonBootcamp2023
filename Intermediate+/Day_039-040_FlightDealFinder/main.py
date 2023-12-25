@@ -16,7 +16,7 @@ if __name__ == "__main__":
     load_dotenv()
     data_manager = FlightData()
     data_manager.set_authentication(os.environ.get("SHEETY_TOKEN", ""))
-    data_manager.set_sheet(os.environ.get("SHEETY_URL", ""))
+    data_manager.set_sheet(os.environ.get("SHEETY_PRICES_URL", ""))
     if TOKENLESS:
         data = [
             {
