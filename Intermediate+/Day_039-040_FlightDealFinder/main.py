@@ -6,9 +6,10 @@ from flight_search import FlightSearch
 from notification_manager import NotificationManager
 from datetime import datetime, timedelta
 import os
+import smtplib
 
 
-TOKENLESS = True
+TOKENLESS = False
 IATA_FROM = "MIL"
 
 
@@ -77,6 +78,19 @@ if __name__ == "__main__":
     else:
         data = data_manager.get_data().json()["prices"]
 
+    # Get users
+    data_manager.set_sheet(os.environ.get("SHEETY_USERS_URL", ""))
+    if TOKENLESS:
+        users = [
+            {
+                "name": "Mario",
+                "surname": "Rossi",
+                "email": "test@gmail.com"
+            }
+        ]
+    else:
+        users = data_manager.get_data().json()["users"]
+
     search = FlightSearch()
     search.set_key(os.environ.get("TEQUILA_API_KEY", ""))
 
@@ -93,7 +107,10 @@ if __name__ == "__main__":
         auth_token=os.environ.get("TWILIO_AUTH_TOKEN", ""),
         account_sid=os.environ.get("TWILIO_ACCOUNT_SID", ""),
         phone_number=os.environ.get("TWILIO_PHONE_NUMBER", ""),
-        receiver_number=os.environ.get("PERSONAL_PHONE_NUMBER", "")
+        receiver_number=os.environ.get("PERSONAL_PHONE_NUMBER", ""),
+        smtp_email=os.environ.get("SMTP_EMAIL", ""),
+        smtp_password=os.environ.get("SMTP_PASSWORD", ""),
+        smtp_receivers=users
     )
 
     for city_data in data:
