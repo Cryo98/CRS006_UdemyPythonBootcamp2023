@@ -1,14 +1,27 @@
 from twilio.rest import Client
+import smtplib
 
 
 class NotificationManager:
     # This class is responsible for sending notifications with the deal flight
     # details.
-    def __init__(self, auth_token: str = "", account_sid: str = "", phone_number: str = "", receiver_number: str = "") -> None:
+    def __init__(
+            self,
+            auth_token: str = "",
+            account_sid: str = "",
+            phone_number: str = "",
+            receiver_number: str = "",
+            smtp_email: str = "",
+            smtp_password: str = "",
+            smtp_receivers: list[str] = list()
+            ) -> None:
         self.auth_token = auth_token
         self.account_sid = account_sid
         self.phone_number = phone_number
         self.receiver_number = receiver_number
+        self.smtp_email = smtp_email
+        self.smtp_password = smtp_password
+        self.smtp_receivers = smtp_receivers
 
     def set_credentials(
             self,
@@ -16,6 +29,9 @@ class NotificationManager:
             account_sid: str = "",
             phone_number: str = "",
             receiver_number: str = "",
+            smtp_email: str = "",
+            smtp_password: str = "",
+            smtp_receivers: list[str] = list(),
             ):
         if auth_token != "":
             self.auth_token = auth_token
@@ -25,6 +41,12 @@ class NotificationManager:
             self.phone_number = phone_number
         if receiver_number != "":
             self.receiver_number = receiver_number
+        if smtp_email != "":
+            self.smtp_email = smtp_email
+        if smtp_password != "":
+            self.smtp_password = smtp_password
+        if len(smtp_receivers) > 0:
+            self.smtp_receivers = smtp_receivers
 
     def send_message(self, message: str, receiver_number: str):
         """Send message to specified number"""
@@ -35,6 +57,13 @@ class NotificationManager:
             from_=self.phone_number
             )
         print(response.status)
+
+    def send_emails(self, message: str, receiver_emails: list):
+        with smtplib.SMTP("smtp.gmail.com") as server:
+            server.starttls()
+            server.login(user=self.smtp_email, password=self.smtp_password)
+            message = f"Subject:Price Alert ✈️\n\n{message}"
+            server.sendmail(from_addr=self.smtp_email, to_addrs=receiver_emails, msg=message)
 
     def price_alert(
             self,
@@ -51,4 +80,5 @@ class NotificationManager:
         locations = f"from {departure_city}-{iata_departure} to {arrival_city}-{iata_arrival},"
         dates = f"on {departure_date}."
         message = " ".join([notice, price, locations, dates])
-        self.send_message(message=message, receiver_number=self.receiver_number)
+        # self.send_message(message=message, receiver_number=self.receiver_number)
+        self.send_emails(message=message, receiver_emails=self.smtp_receivers)
