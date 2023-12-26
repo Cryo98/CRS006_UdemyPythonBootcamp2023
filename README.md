@@ -49,4 +49,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 37  | Habit Tracker               | Intermediate+ | <i>Advanced authentication and API methods</i> | requests | *06/12/23* |
 | 38  | Exercise Tracker            | Intermediate+ | <i>API, Google Sheets</i>                      | requests, dotenv | *09/12/23* |
 | 39  | Flight Deal Finder (part 1) | Intermediate+ | <i>APIs overview</i> | requests, twilio, dotenv | *21/12/23* |
-| 40  | Flight Deal Finder (part 2) | Intermediate+ | <i>APIs overview</i> | | |
+| 40  | Flight Deal Finder (part 2) | Intermediate+ | <i>APIs overview</i> | requests, smtplib | *26/12/23* |
