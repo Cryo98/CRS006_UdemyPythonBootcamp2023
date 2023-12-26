@@ -13,7 +13,7 @@ class NotificationManager:
             receiver_number: str = "",
             smtp_email: str = "",
             smtp_password: str = "",
-            smtp_receivers: list[str] = list()
+            smtp_receivers: list[dict] = list()
             ) -> None:
         self.auth_token = auth_token
         self.account_sid = account_sid
@@ -31,7 +31,7 @@ class NotificationManager:
             receiver_number: str = "",
             smtp_email: str = "",
             smtp_password: str = "",
-            smtp_receivers: list[str] = list(),
+            smtp_receivers: list[dict] = list(),
             ):
         if auth_token != "":
             self.auth_token = auth_token
@@ -62,8 +62,10 @@ class NotificationManager:
         with smtplib.SMTP("smtp.gmail.com") as server:
             server.starttls()
             server.login(user=self.smtp_email, password=self.smtp_password)
-            message = f"Subject:Price Alert ✈️\n\n{message}"
-            server.sendmail(from_addr=self.smtp_email, to_addrs=receiver_emails, msg=message)
+            for receipient in receiver_emails:
+                personal_message = f"Good news {receipient['name']} {receipient['surname']}!\n{message}"
+                personal_message = f"Subject:Flight Deal Price Alert\n\n{personal_message}"
+                server.sendmail(from_addr=self.smtp_email, to_addrs=receipient["email"], msg=personal_message.encode("utf-8"))
 
     def price_alert(
             self,
@@ -76,7 +78,7 @@ class NotificationManager:
             ):
         """Sends an alert containing flight info"""
         notice = "Low price alert!"
-        price = f"Only €{flight_cost} to fly"
+        price = f"Only {'€'}{flight_cost} to fly"
         locations = f"from {departure_city}-{iata_departure} to {arrival_city}-{iata_arrival},"
         dates = f"on {departure_date}."
         message = " ".join([notice, price, locations, dates])
