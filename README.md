@@ -51,4 +51,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 39  | Flight Deal Finder (part 1) | Intermediate+ | <i>APIs overview</i> | requests, twilio, dotenv | *21/12/23* |
 | 40  | Flight Deal Finder (part 2) | Intermediate+ | <i>APIs overview</i> | requests, smtplib | *26/12/23* |
 | 41  | Movie Ranking               | Intermediate+ | <i>HTML</i>          | None | *27/12/23* |
-| 42  | Birthday Invite Website     | Intermediate+ | <i>Advanced HTML</i> | | |
+| 42  | Birthday Invite Website     | Intermediate+ | <i>Advanced HTML</i> | None | *28/12/23* |
