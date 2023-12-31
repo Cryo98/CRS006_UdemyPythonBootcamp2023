@@ -53,3 +53,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 41  | Movie Ranking               | Intermediate+ | <i>HTML</i>          | None | *27/12/23* |
 | 42  | Birthday Invite Website     | Intermediate+ | <i>Advanced HTML</i> | None | *28/12/23* |
 | 43  | Colour Vocab Website        | Intermediate+ | <i>CSS</i>           | None | *31/12/23* |
+| 44  | Motivational Poster         | Intermediate+ | <i>Intermediate CSS </i> | | |
