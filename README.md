@@ -54,4 +54,4 @@ The programs range from beginner to professional level, with the aim of improvin
 | 42  | Birthday Invite Website     | Intermediate+ | <i>Advanced HTML</i> | None | *28/12/23* |
 | 43  | Colour Vocab Website        | Intermediate+ | <i>CSS</i>           | None | *31/12/23* |
 | 44  | Motivational Poster         | Intermediate+ | <i>Intermediate CSS</i> | None | *02/01/23* |
-| 45  | 100 Must Watch Movies       | Intermediate+ | <i>Web Scraping</i> | | |
+| 45  | 100 Must Watch Movies       | Intermediate+ | <i>Web Scraping</i> | bs4, requests | *19/01/23* |
